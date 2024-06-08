@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GS - Lista de Peixes</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">    
+</head>
+<body>
+	<div th:replace="layout/menu :: menuFragment"></div>
+
+	<div id="content">
+    <div class="container">
+        <h3>Catalogo de Peixes</h3>
+        
+        <a href="add" class="btn-sm btn-primary"><i class="fas fa-plus"></i></a>
+        
+        <table class="table table-hover table-sm">
+            <thead>
+                <tr>
+                    <th>Nome do Peixe</th>
+                    <th>Descrição</th>                
+                    <th>Peso Máximo (kg)</th>    
+                    <th>Data de Catalogação</th>    
+                    <th>Ações</th>                             
+                </tr>
+            </thead>
+            <tbody>
+               <tr th:each="peixe : ${peixe}">
+                   	<td th:text="${peixe.nome!= null ?  peixe.nome : '--' }"></td>     
+                   	<td th:text="${peixe.desc!= null ?  peixe.desc : '--' }"></td>    
+                   	<td th:text="${peixe.peso!= null ?  peixe.peso : '--' }"></td>    
+                   	<td th:text="${peixe.dataCatalogacao!= null ?  peixe.dataCatalogacao : '--' }"></td>  
+                   	<td>
+                   		<a class="btn-sm btn-primary" th:href="@{/update/{id}(id=${peixe.id})}">Editar</a>
+	                   	<a class="btn-sm btn-danger" th:href="@{/delete/{id}(id=${peixe.id})}">Excluir</a>
+                   	</td>               
+               </tr>       
+            </tbody>
+        </table>
+        
+    </div>
+	</div>
+    </body>
+</html>
